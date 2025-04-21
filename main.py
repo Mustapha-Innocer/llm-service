@@ -2,6 +2,7 @@ import asyncio
 import json
 
 from lib.kafka.consumer import consumer
+from lib.kafka.producer import delivery_report, kafka_producer
 from lib.llm.llm import categorize, summerize
 from lib.logging.logger import LOGGER
 
@@ -27,10 +28,17 @@ async def consume():
                 LOGGER.error(f"Consumer error: {msg.error()}")
                 continue
 
-            data = json.loads(msg.value().decode('utf-8'))
+            data = json.loads(msg.value().decode("utf-8"))
             LOGGER.info(f"Received new strory: {data["url"]}")
             await asyncio.gather(summerize(data), categorize(data))
-            # consumer.commit()
+            consumer.commit()
+
+            with kafka_producer() as producer:
+                producer.produce(
+                    topic="processed-data",
+                    value=json.dumps(data),
+                    callback=delivery_report,
+                )
         except Exception as e:
             LOGGER.error(f"Unable to process {data["url"]}: {e}")
             await asyncio.sleep(30)
@@ -38,6 +46,7 @@ async def consume():
 
 async def main():
     await asyncio.gather(heartbeat(), consume())
+
 
 if __name__ == "__main__":
     LOGGER.info(f"{'*' * 10} Starting LLM Service {'*' * 10}")
