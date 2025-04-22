@@ -11,7 +11,7 @@ This microservice is part of a news aggregator system. It consumes raw news stor
 - 🔄 Subscribes to a Kafka topic and republishes processed data
 - 🐍 Built with Python, `asyncio`, and Hugging Face Transformers
 - 📦 Dockerized for easy deployment
-- ⚙️ GitHub Actions CI for pull requests to `main`
+- ⚙️ GitHub Actions CI for pull requests and push to `main` and `dev`
 
 ---
 
@@ -25,12 +25,38 @@ This microservice is part of a news aggregator system. It consumes raw news stor
 
 ---
 
-## 🔧 Environment Variables
+## 🧪 Local Development
 
-The `.env` file should contain:
+### 1. Clone the repo
+```bash
+git clone https://github.com/Mustapha-Innocer/llm-service.git
+cd llm-service
+```
 
-```env
+### 2. Create `.env` file with the appropriate values
+```ini
 # Kafka
 KAFKA_SERVER=localhost
 KAFKA_PORT=9094
 ```
+
+### 3. Create new python virtual environment
+```bash
+python -m venv venv
+```
+
+### 4. Intall the python dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Run
+```bash
+python main.py
+```
+
+---
+
+## 🧱 Related Services
+
+This is part of a larger microservice-based system. See the [Main Project README](https://github.com/Mustapha-Innocer/news-aggregator) for architecture and links to all services.
