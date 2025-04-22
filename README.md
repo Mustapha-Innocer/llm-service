@@ -11,7 +11,7 @@ This microservice is part of a news aggregator system. It consumes raw news stor
 - 🔄 Subscribes to a Kafka topic and republishes processed data
 - 🐍 Built with Python, `asyncio`, and Hugging Face Transformers
 - 📦 Dockerized for easy deployment
-- ⚙️ GitHub Actions CI for pull requests to `main`
+- ⚙️ GitHub Actions CI for pull requests and push to `main` and `dev`
 
 ---
 
