@@ -1,5 +1,6 @@
 import asyncio
 import json
+import traceback
 
 from lib.kafka.consumer import consumer
 from lib.kafka.producer import delivery_report, kafka_producer
@@ -41,6 +42,7 @@ async def consume():
                 )
         except Exception as e:
             LOGGER.error(f"Unable to process {data["url"]}: {e}")
+            traceback.print_exc()
             await asyncio.sleep(30)
 
 
@@ -54,3 +56,4 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         LOGGER.info(f"{'*' * 10} LLM Service closed {'*' * 10}")
+
