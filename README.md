@@ -29,8 +29,8 @@ This microservice is part of a news aggregator system. It consumes raw news stor
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/Mustapha-Innocer/scraping-service.git
-cd scraping-service
+git clone https://github.com/Mustapha-Innocer/llm-service.git
+cd llm-service
 ```
 
 ### 2. Create `.env` file with the appropriate values
