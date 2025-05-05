@@ -6,6 +6,7 @@ from lib.kafka.consumer import consumer
 from lib.kafka.producer import delivery_report, kafka_producer
 from lib.llm.llm import categorize, summerize
 from lib.logging.logger import LOGGER
+from lib.config.config import KAFKA_PRODUCER_TOPIC, KAFKA_CONSUMER_TOPIC
 
 
 async def heartbeat():
@@ -15,7 +16,7 @@ async def heartbeat():
 
 
 async def consume():
-    consumer.subscribe(["news-data"])
+    consumer.subscribe([KAFKA_CONSUMER_TOPIC])
     while True:
         try:
             msg = consumer.poll(5)
@@ -36,7 +37,7 @@ async def consume():
 
             with kafka_producer() as producer:
                 producer.produce(
-                    topic="processed-data",
+                    topic=KAFKA_PRODUCER_TOPIC,
                     value=json.dumps(data),
                     callback=delivery_report,
                 )

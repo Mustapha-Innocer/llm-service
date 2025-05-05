@@ -38,6 +38,8 @@ cd llm-service
 # Kafka
 KAFKA_SERVER=localhost
 KAFKA_PORT=9094
+KAFKA_PRODUCER_TOPIC=processed-data
+KAFKA_CONSUMER_TOPIC=news-data
 ```
 
 ### 3. Create new python virtual environment
