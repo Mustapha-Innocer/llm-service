@@ -9,9 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      KAFKA_SERVER: ${{vars.KAFKA_SERVER}}
-      KAFKA_PORT: ${{vars.KAFKA_PORT}}
     strategy:
       fail-fast: false
       matrix:
